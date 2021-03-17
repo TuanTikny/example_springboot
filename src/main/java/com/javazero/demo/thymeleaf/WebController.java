@@ -1,4 +1,4 @@
-package com.javazero.demo.thymeleaft;
+package com.javazero.demo.thymeleaf;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
