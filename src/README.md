@@ -1,6 +1,6 @@
 # Sử dụng và cấu hình images MySql docker:
 
-Install images run lên sau : docker pull mysql.
+Install images bằng lệnh sau : `docker pull mysql`.
 
 ## Sử dụng docker created mySQL.
 
@@ -38,7 +38,17 @@ max_allowed_packet=500M
 
 - chạy lệnh sau có tác dụng sinh ra 1 dir để chứa tất cả các dữ liệu BD lại tại máy local :`mkdir -p /Users/macbook/Volume_DBdocker/mysql/[container_name]/mysql-data`
 
-#### 2.3. Now start the container.
+#### 2.3. Thực hiện tạo container mà ta vừa cấu hình qua các bước đơn giản phía trên.
+
+```
+docker run /
+--detach /
+--name=[container_name] /
+--env="MYSQL_ROOT_PASSWORD=my_password" --publish 3306:3306 /
+--volume=/Users/macbook/Volume_DBdocker/mysql/[container_name]/conf.d:/etc/mysql/conf.d /
+--volume=/Users/macbook/Volume_DBdocker/mysql/[container_name]/mysql-data:/var/lib/mysql /
+mysql
+```
 
 `docker run --detach --name=[container_name] --env="MYSQL_ROOT_PASSWORD=my_password" --publish 3306:3306 --volume=/Users/macbook/Volume_DBdocker/mysql/[container_name]/conf.d:/etc/mysql/conf.d --volume=/Users/macbook/Volume_DBdocker/mysql/[container_name]/mysql-data:/var/lib/mysql mysql`
 
@@ -53,7 +63,9 @@ max_allowed_packet=500M
 Link bài viết tham khảo : ( https://phoenixnap.com/kb/mysql-docker-container ).
 Tương tự với context này có thẻ cấu hình cho các hệ cơ sở dũ liệu khác.
 
-### Sử dụng mysql Shell để thực hiện truy vấn tạo DB cũng như created bảng.
+---
+
+## Sử dụng mysql Shell để thực hiện truy vấn tạo DB cũng như created bảng.
 
 #### Tạo Database
 
