@@ -16,7 +16,7 @@ Trong đó `[container_name]` là tên mà bạn chọn đặt cho container myS
 
 Cách cấu hình :
 
-2.1. Tạo volume cho file cấu hình :
+#### 2.1. Tạo volume cho file cấu hình :
 
 - Chạy lệnh sau để tạo 1 thư mục chứa file config trên phía máy local.
   `mkdir -p /Users/macbook/Volume_DBdocker/mysql/[container_name]/conf.d`
@@ -33,15 +33,16 @@ max_allowed_packet=500M
 ```
 
 - Tiến hành save và exit lại file `my-custom.cnf`.
-  2.2. Tạo volume cho data storage :
-- chạy lệnh sau có tác dụng sinh ra 1 dir để chứa tất cả các dữ liệu BD lại tại máy local :
-  `mkdir -p /Users/macbook/Volume_DBdocker/mysql/[container_name]/mysql-data`
 
-  2.3. Now start the container.
+#### 2.2. Tạo volume cho data storage :
+
+- chạy lệnh sau có tác dụng sinh ra 1 dir để chứa tất cả các dữ liệu BD lại tại máy local :`mkdir -p /Users/macbook/Volume_DBdocker/mysql/[container_name]/mysql-data`
+
+#### 2.3. Now start the container.
 
 `docker run --detach --name=[container_name] --env="MYSQL_ROOT_PASSWORD=my_password" --publish 3306:3306 --volume=/Users/macbook/Volume_DBdocker/mysql/[container_name]/conf.d:/etc/mysql/conf.d --volume=/Users/macbook/Volume_DBdocker/mysql/[container_name]/mysql-data:/var/lib/mysql mysql`
 
-- Note me :
+#### Note me :
 
 - Ta có thể sử dụng lệnh : `docker inspect [container_name]` để xem thông tin của 1 container vừa tạo.
 
@@ -52,7 +53,7 @@ max_allowed_packet=500M
 Link bài viết tham khảo : ( https://phoenixnap.com/kb/mysql-docker-container ).
 Tương tự với context này có thẻ cấu hình cho các hệ cơ sở dũ liệu khác.
 
-## Sử dụng mysql Shell để thực hiện truy vấn tạo DB cũng như created bảng.
+### Sử dụng mysql Shell để thực hiện truy vấn tạo DB cũng như created bảng.
 
 #### Tạo Database
 
