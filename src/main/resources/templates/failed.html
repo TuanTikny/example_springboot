@@ -5,16 +5,18 @@
   <title>Loda To-do</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
+  <!--css-->
   <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
   <link th:href="@{/css/main.css}" rel="stylesheet" />
 
+  <!--js-->
+  <script th:src="@{/js/bootstrap.js}"></script>
 </head>
 <body>
-<h1>To-do</h1>
-<h1 style="color: green" th:text="#{loda.message.success}"></h1>
+<h1 th:text="#{loda.message.hello}"></h1>
 
 <a th:href="@{/listTodo}" th:text="#{loda.value.viewListTodo}" class="btn btn-primary"></a>
-
+<a th:href="@{/addTodo}" th:text="#{loda.value.addTodo}" class="btn btn-success"></a>
 </body>
 
 </html>
