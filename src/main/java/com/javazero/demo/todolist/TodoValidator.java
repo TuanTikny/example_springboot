@@ -15,9 +15,20 @@ public class TodoValidator {
 	 * @param todo
 	 * @return
 	 */
-	public boolean isValid(Todo todo) {
-		return Optional.ofNullable(todo).filter(t -> !StringUtils.isEmpty(t.getTitle())) // Kiểm tra title khác rỗng
-				.filter(t -> !StringUtils.isEmpty(t.getDetail())) // Kiểm tra detail khác rỗng
-				.isPresent(); // Trả về true nếu hợp lệ, ngược lại false
+	public boolean isValid(Todo todo) throws Exception {
+
+		Optional<Todo> optional = Optional.ofNullable(todo);
+
+		// Kiểm tra title khác rỗng
+		if (!optional.filter(t -> !StringUtils.isEmpty(t.getTitle())).isPresent()) {
+			throw new Exception("The Title is not empty!");
+		}
+
+		// Kiểm tra detail khác rỗng
+		if (!optional.filter(t -> !StringUtils.isEmpty(t.getDetail())).isPresent()) {
+			throw new Exception("The Detail is not empty!");
+		}
+
+		return true;
 	}
 }

@@ -38,7 +38,7 @@ public class TodoController {
 	 * @ModelAttribute đánh dấu đối tượng Todo được gửi lên bởi Form Request
 	 */
 	@PostMapping("/addTodo")
-	public String addTodo(@ModelAttribute Todo todo) {
+	public String addTodo(@ModelAttribute Todo todo) throws Exception {
 		return Optional.ofNullable(todoService.add(todo)).map(t -> "success") // Trả về success nếu save thành công
 				.orElse("failed"); // Trả về failed nếu không thành công
 

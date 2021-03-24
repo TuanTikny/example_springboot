@@ -44,7 +44,7 @@ public class RestApiController {
 
 	// post add update sài chung, sửa thì thêm id vào Object
 	@PostMapping("/todo")
-	public ResponseEntity<Todo> addTodo(@RequestBody Todo todo) {
+	public ResponseEntity<Todo> addTodo(@RequestBody Todo todo) throws Exception {
 		Todo newtodo = todoService.add(todo);
 		return ResponseEntity.ok().body(newtodo);
 	}

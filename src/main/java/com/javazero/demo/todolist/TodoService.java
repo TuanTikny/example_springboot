@@ -43,13 +43,19 @@ public class TodoService {
 		return todo;
 	}
 
-	public Todo add(Todo todo) {
+	/**
+	 * Trả về todo có id = todoId.
+	 * 
+	 * @param todo ( todo cần thêm)
+	 * @return todo ( trả về phần tử đã thêm, trả về null nếu không thêm được hoặc  )
+	 */
+	public Todo add(Todo todo) throws Exception {
 
 		if (validator.isValid(todo)) {
 			return todoRepository.save(todo);
 		}
 
-		return null;
+		throw new Exception("Validation todo");
 	}
 
 	public int remove(Integer todoId) throws Exception {
