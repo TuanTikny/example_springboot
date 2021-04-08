@@ -14,11 +14,17 @@ import javax.persistence.Table;
 import com.javazero.demo.category.Category;
 import com.javazero.demo.user.User;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "post")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Post {
 
 	@Id
@@ -28,8 +34,11 @@ public class Post {
 	@Column
 	private String title;
 
+	@Column(columnDefinition="text")
+	private String content;
+	
 	@Column
-	private Integer content;
+	private String modifile;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "fk_post_user"))

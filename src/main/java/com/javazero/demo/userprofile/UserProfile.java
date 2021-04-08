@@ -26,17 +26,20 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserProfile {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-  @Column
-  private String address;
+	@Column
+	private String address;
+	
+	@Column
+	private String token;
 
-  @Column
-  private Integer gender;
+	@Column
+	private Integer gender;
 
-  @OneToOne(fetch = FetchType.LAZY)
-  @PrimaryKeyJoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_user_profile"))
-  private User user;
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_user_profile"))
+	private User user;
 }

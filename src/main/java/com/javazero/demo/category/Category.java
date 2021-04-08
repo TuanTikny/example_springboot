@@ -17,7 +17,9 @@ import com.javazero.demo.post.Post;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -27,14 +29,19 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Category {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-  @Column
-  private String name;
+	@Column
+	private String name;
+	
+	@Column(name = "type_category")
+	private String typeCategory;
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
-  @OrderBy("title")
-  private Set<Post> posts;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+	@OrderBy("title")
+	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
+	private Set<Post> posts;
 }
