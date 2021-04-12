@@ -46,6 +46,9 @@ public class User {
 
 	@Column
 	private String fullname;
+	
+	@Column
+	private String remoteAddress;
 
 	@Column(nullable = false, length = 255, unique = true)
 	private String username;
