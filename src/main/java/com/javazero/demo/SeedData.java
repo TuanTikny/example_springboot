@@ -8,6 +8,7 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -44,10 +45,13 @@ public class SeedData {
 
 	@Autowired
 	CategoryRepository categoryRepository;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
 //	@Autowired
 //	PasswordEncoder passwordEncoder;
-	
+
 	private final static String USER_BUIANHTUAN = "buianhtuan";
 	private final static String USER_NGUYENVANBINH = "nguyenvanbinh";
 	private final static String USER_VOTHIANH = "vothianh";
@@ -61,14 +65,15 @@ public class SeedData {
 		if (roleRepository.findAll().size() <= 0) {
 			List<Role> roles = Arrays.asList(
 					Role.builder().name(RoleConst.ROOT).build(),
-					Role.builder().name(RoleConst.READ).build(), 
+					Role.builder().name(RoleConst.READ).build(),
 					Role.builder().name(RoleConst.WRITE).build());
 
 			roleRepository.saveAll(roles);
 
 		} else {
 			List<Role> roles = roleRepository.findAll();
-			logger.info("The table role have data! :",roles);
+			logger.info("The table role have data! :", roles);
+//			throw new HibernateException(">>>>>>>>>>>>>>>>>>> Data seed had on DB <<<<<<<<<<<<<<<<<");
 		}
 
 	}
@@ -83,7 +88,7 @@ public class SeedData {
 
 			List<Role> fullRoles = Arrays.asList(
 					roleRepository.findByName(RoleConst.ROOT),
-					roleRepository.findByName(RoleConst.READ), 
+					roleRepository.findByName(RoleConst.READ),
 					roleRepository.findByName(RoleConst.WRITE));
 
 			List<Role> readAndWriteRoles = Arrays.asList(
@@ -96,27 +101,27 @@ public class SeedData {
 			List<User> users = Arrays.asList(
 					User.builder().fullname("Bui Anh Tuan")
 					.username(USER_BUIANHTUAN)
-					.password("123456")
+					.password(passwordEncoder.encode("123456"))
 					.createdAt(DateTime.now().toDate())
 					.userProfile(UserProfile.builder().address("Da Nang City").gender(GenderConst.MALE).build())
 					.roles(fullRoles)
 					.build(),
 					User.builder().fullname("Nguyen Van Binh")
 					.username(USER_NGUYENVANBINH)
-					.password("123456")
+					.password(passwordEncoder.encode("123456"))
 					.createdAt(DateTime.now().toDate())
 					.userProfile(UserProfile.builder().address("HCM City").gender(GenderConst.MALE).build())
 					.roles(readAndWriteRoles)
 					.build(),
 					User.builder().fullname("Vo Thi Anh")
 					.username(USER_VOTHIANH)
-					.password("123456")
+					.password(passwordEncoder.encode("123456"))
 					.createdAt(DateTime.now().toDate())
 					.userProfile(UserProfile.builder().address("Ha Noi City").gender(GenderConst.FEMALE).build())
 					.roles(readRoles)
 					.build()
 					);
-			
+
 			userRepository.saveAll(users);
 		} else {
 			List<User> users = userRepository.findAll();
@@ -133,7 +138,7 @@ public class SeedData {
 		if (categoryRepository.findAll().size() <= 0) {
 			List<Category> categorys = Arrays.asList(
 					Category.builder().name("Blog về java").typeCategory(CategoryConst.BLOG_JAVA).build(),
-					Category.builder().name("Blog về javascript").typeCategory(CategoryConst.BLOG_JAVASCRIPT).build(), 
+					Category.builder().name("Blog về javascript").typeCategory(CategoryConst.BLOG_JAVASCRIPT).build(),
 					Category.builder().name("Blog cuộc sống của dev").typeCategory(CategoryConst.BLOG_DEV).build());
 
 			categoryRepository.saveAll(categorys);
@@ -157,7 +162,7 @@ public class SeedData {
 			User buiAnhTuan = userRepository.findByUsername(USER_BUIANHTUAN);
 			User nguyenVanBinh = userRepository.findByUsername(USER_NGUYENVANBINH);
 			User voThiAnh = userRepository.findByUsername(USER_VOTHIANH);
-			
+
 			// Select category assign for Post
 			Category blogJava = categoryRepository.findByTypeCategory(CategoryConst.BLOG_JAVA);
 			Category blogJavaScript = categoryRepository.findByTypeCategory(CategoryConst.BLOG_JAVASCRIPT);
