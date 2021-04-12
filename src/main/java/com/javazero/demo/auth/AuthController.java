@@ -1,5 +1,7 @@
 package com.javazero.demo.auth;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -8,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +27,13 @@ public class AuthController {
 	private JwtTokenProvider tokenProvider;
 
 	@PostMapping("/login")
-	public LoginResponse authenticateUser(@Validated @RequestBody LoginRequest loginRequest) {
+	public LoginResponse authenticateUser(@Validated @RequestBody LoginRequest loginRequest,
+			@RequestHeader Map<String, String> headers) {
+
+		// Lấy thêm thông tin từ header
+//		headers.forEach((key, value) -> {
+//			System.out.println("Header '%s' = %s" + key + "  : " + value);
+//		});
 
 		// Xác thực thông tin người dùng Request lên
 		Authentication authentication = authenticationManager.authenticate(

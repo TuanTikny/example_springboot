@@ -42,9 +42,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 					SecurityContextHolder.getContext().setAuthentication(authentication);
 				}
+			} else {
+				//Set user đăng nhập tạm thời out khỏi phiên làm việc
+				SecurityContextHolder.getContext().setAuthentication(null);
 			}
 		} catch (Exception ex) {
-			System.out.println("failed on set user authentication : "+ex);
+			System.out.println("failed on set user authentication : " + ex);
 		}
 
 		filterChain.doFilter(request, response);
