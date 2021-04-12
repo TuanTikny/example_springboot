@@ -50,6 +50,26 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
+		<!-- spring security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+
+		<!-- control time -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.10.10</version>
+		</dependency>
+
 		<!-- auto reload -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -72,10 +92,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				
+
 				<configuration>
-				<mainClass>${start.class}</mainClass>
-				<layout>JAR</layout>
+					<mainClass>${start.class}</mainClass>
+					<layout>JAR</layout>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
@@ -83,7 +103,7 @@
 						</exclude>
 					</excludes>
 				</configuration>
-				
+
 			</plugin>
 		</plugins>
 	</build>
